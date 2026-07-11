@@ -452,3 +452,30 @@ footer .legal {
 }
 .island-map .leaflet-popup-content { font-family: var(--font-body); font-size: 0.85rem; }
 .atoll-facts { margin-top: 2rem; display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+
+/* ---------- mobile header stacking ---------- */
+@media (max-width: 720px) {
+  .site-header .wrap { flex-direction: column; align-items: flex-start; gap: 0.55rem; }
+  nav.main-nav { gap: 0.5rem 1.1rem; }
+}
+
+/* ---------- scoped typography (survives app-level CSS resets) ---------- */
+.bs h1, .bs h2, .bs h3,
+.hero h1, section h2, section h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0;
+}
+.bs h1, .hero h1 { font-size: clamp(2.6rem, 7vw, 5rem); letter-spacing: 0.01em; color: var(--sand-050); }
+.bs h2, section h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--sand-050); }
+.bs h3, section h3 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); color: var(--sand-050); }
+.bs .exp h3, section .exp h3 { font-size: 1.15rem; }
+.bs .prop-card h3 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); }
+.bs .section-sand h2, .bs .section-sand h3,
+.section-sand h2, .section-sand h3 { color: var(--ocean-900); }
+.bs .section-sand .prop-card h3, .section-sand .prop-card h3 { color: var(--sand-050); }
+.bs a { color: var(--gold-300); text-decoration: none; }
+.bs a:hover { color: var(--gold-400); }
+.bs .facts, .bs ul.facts { list-style: none; }
+.bs section, .bs .hero { box-sizing: border-box; }
