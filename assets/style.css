@@ -435,3 +435,6 @@ footer .legal {
 
 .section-sand .prop-card p { color: var(--ink-300); }
 .section-sand .prop-card { border-color: rgba(179, 146, 74, 0.35); }
+.section-sand .prop-card h3 { color: var(--sand-050); }
+.section-sand .prop-card .go { color: var(--gold-300); }
+.section-sand .prop-card:hover .go { color: var(--gold-400); }
