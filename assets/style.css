@@ -141,7 +141,7 @@ nav.main-nav a:hover { color: var(--gold-300); }
   min-height: 92vh;
   display: flex;
   align-items: flex-end;
-  padding: 0 0 clamp(3rem, 8vw, 6rem);
+  padding: 9rem 0 clamp(3rem, 8vw, 6rem);
   overflow: hidden;
   isolation: isolate;
 }
