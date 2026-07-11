@@ -1,0 +1,434 @@
+/*
+ * The Sultanate Hotels — brand design system
+ * Shares the "obsidian glass" DNA of the Maldives Explore Map:
+ * deep ocean navy, warm sand, one precious accent (champagne gold).
+ */
+
+:root {
+  --ocean-950: #050d1a;
+  --ocean-900: #081426;
+  --ocean-800: #0b2b45;
+  --ocean-700: #10395c;
+  --sand-050: #faf6ec;
+  --sand-100: #f4ecdb;
+  --sand-200: #e8dcc3;
+  --sand-300: #d9c9a6;
+  --gold-400: #d4b46a;
+  --gold-300: #e3cb8f;
+  --gold-500: #b3924a;
+  --aqua-400: #5fd3c9;
+  --ink-300: #9fb2c8;
+  --ink-700: #2c3a4d;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
+  --max-w: 1100px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--ocean-950);
+  color: var(--sand-100);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--gold-400); color: var(--ocean-950); }
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--gold-300); text-decoration: none; }
+a:hover { color: var(--gold-400); }
+
+/* ---------- typography ---------- */
+
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--sand-050);
+}
+
+h1 { font-size: clamp(2.6rem, 7vw, 5rem); letter-spacing: 0.01em; }
+h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+h3 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+  margin: 0 0 1rem;
+}
+
+.lede {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--ink-300);
+  max-width: 42em;
+}
+
+/* ---------- layout ---------- */
+
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 3rem);
+}
+
+section { padding: clamp(3.5rem, 9vw, 7rem) 0; }
+
+/* ---------- header ---------- */
+
+.site-header {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 10;
+  padding: 1.4rem 0;
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sand-050);
+  white-space: nowrap;
+}
+
+.brand small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  letter-spacing: 0.42em;
+  color: var(--gold-400);
+  margin-top: 0.15rem;
+}
+
+nav.main-nav { display: flex; gap: clamp(1rem, 3vw, 2.2rem); flex-wrap: wrap; }
+
+nav.main-nav a {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sand-200);
+  transition: color 0.3s var(--ease-cinematic);
+}
+nav.main-nav a:hover { color: var(--gold-300); }
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 0 clamp(3rem, 8vw, 6rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero::before {
+  /* obsidian ocean with a bathymetric glow — non-photographic by design */
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 90% 55% at 70% 15%, rgba(16, 57, 92, 0.9), transparent 65%),
+    radial-gradient(ellipse 70% 45% at 20% 80%, rgba(95, 211, 201, 0.12), transparent 60%),
+    radial-gradient(ellipse 45% 30% at 82% 70%, rgba(212, 180, 106, 0.10), transparent 65%),
+    linear-gradient(180deg, #071120 0%, var(--ocean-950) 100%);
+}
+
+.hero::after {
+  /* faint atoll ring */
+  content: '';
+  position: absolute;
+  z-index: -1;
+  width: 60vmin;
+  height: 60vmin;
+  right: -10vmin;
+  top: 8vmin;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 180, 106, 0.22);
+  box-shadow:
+    0 0 80px rgba(212, 180, 106, 0.08),
+    inset 0 0 60px rgba(95, 211, 201, 0.06);
+}
+
+.hero .eyebrow { margin-bottom: 1.4rem; }
+.hero h1 { max-width: 12em; }
+.hero .lede { margin-top: 1.6rem; }
+
+.hero-meta {
+  margin-top: 2.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 2.2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-300);
+}
+.hero-meta span::before { content: '◆'; color: var(--gold-500); font-size: 0.55rem; margin-right: 0.7rem; vertical-align: 2px; }
+
+/* ---------- gold rule ---------- */
+
+.rule {
+  width: 64px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold-400), transparent);
+  border: 0;
+  margin: 1.6rem 0 0;
+}
+
+/* ---------- property grid (brand home) ---------- */
+
+.props {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.4rem;
+  margin-top: 3rem;
+}
+
+.prop-card {
+  position: relative;
+  display: block;
+  padding: 2.2rem 1.9rem 1.9rem;
+  border: 1px solid rgba(212, 180, 106, 0.18);
+  background: linear-gradient(165deg, rgba(11, 43, 69, 0.55), rgba(8, 20, 38, 0.85));
+  color: var(--sand-100);
+  transition: border-color 0.4s var(--ease-cinematic), transform 0.4s var(--ease-cinematic);
+}
+
+.prop-card:hover {
+  border-color: rgba(212, 180, 106, 0.55);
+  transform: translateY(-4px);
+  color: var(--sand-100);
+}
+
+.prop-card .atoll {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--aqua-400);
+}
+
+.prop-card h3 { margin: 0.7rem 0 0.6rem; }
+
+.prop-card p { color: var(--ink-300); font-size: 0.92rem; margin: 0; }
+
+.prop-card .go {
+  display: inline-block;
+  margin-top: 1.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+.prop-card .go::after { content: ' →'; }
+
+/* ---------- alternating sections ---------- */
+
+.section-sand {
+  background: var(--sand-100);
+  color: var(--ink-700);
+}
+.section-sand h2, .section-sand h3 { color: var(--ocean-900); }
+.section-sand .lede, .section-sand p { color: #4c5a6d; }
+.section-sand .eyebrow { color: var(--gold-500); }
+
+.two-col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+/* ---------- facts / detail lists ---------- */
+
+.facts {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.facts li {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(159, 178, 200, 0.18);
+  font-size: 0.92rem;
+}
+.section-sand .facts li { border-color: rgba(44, 58, 77, 0.14); }
+
+.facts .k {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gold-400);
+  padding-top: 0.2rem;
+  white-space: nowrap;
+}
+.section-sand .facts .k { color: var(--gold-500); }
+
+.facts .v { text-align: right; }
+
+.tbc {
+  font-style: italic;
+  opacity: 0.65;
+}
+
+/* ---------- experiences ---------- */
+
+.exp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.2rem;
+  margin-top: 2.6rem;
+}
+
+.exp {
+  padding: 1.6rem 1.5rem;
+  border: 1px solid rgba(159, 178, 200, 0.16);
+  background: rgba(8, 20, 38, 0.5);
+}
+.section-sand .exp { background: rgba(255, 255, 255, 0.55); border-color: rgba(44, 58, 77, 0.12); }
+
+.exp h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+.exp p { font-size: 0.88rem; margin: 0; color: var(--ink-300); }
+.section-sand .exp p { color: #4c5a6d; }
+
+/* ---------- CTA ---------- */
+
+.btn {
+  display: inline-block;
+  margin-top: 2.2rem;
+  padding: 0.95rem 2.4rem;
+  border: 1px solid var(--gold-400);
+  color: var(--gold-300);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  transition: background 0.35s var(--ease-cinematic), color 0.35s var(--ease-cinematic);
+}
+.btn:hover { background: var(--gold-400); color: var(--ocean-950); }
+
+/* ---------- footer ---------- */
+
+footer {
+  border-top: 1px solid rgba(212, 180, 106, 0.18);
+  padding: 3rem 0 3.5rem;
+  font-size: 0.82rem;
+  color: var(--ink-300);
+}
+
+footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem 3rem;
+}
+
+footer nav { display: flex; flex-direction: column; gap: 0.45rem; }
+footer nav a { color: var(--ink-300); }
+footer nav a:hover { color: var(--gold-300); }
+
+footer .foot-brand { max-width: 22em; }
+footer .foot-brand .brand { font-size: 1.05rem; }
+
+/* ---------- property hero variants ---------- */
+
+.hero.h-fulhadhoo::before {
+  background:
+    radial-gradient(ellipse 85% 50% at 30% 20%, rgba(95, 211, 201, 0.16), transparent 60%),
+    radial-gradient(ellipse 70% 45% at 80% 75%, rgba(212, 180, 106, 0.12), transparent 60%),
+    linear-gradient(180deg, #06131f 0%, var(--ocean-950) 100%);
+}
+.hero.h-edge::before {
+  background:
+    radial-gradient(ellipse 80% 55% at 75% 10%, rgba(16, 57, 92, 1), transparent 65%),
+    radial-gradient(ellipse 55% 40% at 15% 85%, rgba(95, 211, 201, 0.14), transparent 60%),
+    linear-gradient(180deg, #050f1c 0%, var(--ocean-950) 100%);
+}
+.hero.h-courtyard::before {
+  background:
+    radial-gradient(ellipse 75% 50% at 50% 0%, rgba(212, 180, 106, 0.14), transparent 60%),
+    radial-gradient(ellipse 60% 45% at 85% 80%, rgba(16, 57, 92, 0.9), transparent 65%),
+    linear-gradient(180deg, #081120 0%, var(--ocean-950) 100%);
+}
+.hero.h-beach::before {
+  background:
+    radial-gradient(ellipse 90% 55% at 25% 15%, rgba(95, 211, 201, 0.18), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 85%, rgba(232, 220, 195, 0.10), transparent 60%),
+    linear-gradient(180deg, #06121f 0%, var(--ocean-950) 100%);
+}
+.hero.h-laamu::before {
+  background:
+    radial-gradient(ellipse 85% 55% at 70% 20%, rgba(16, 57, 92, 0.95), transparent 65%),
+    radial-gradient(ellipse 65% 45% at 20% 80%, rgba(212, 180, 106, 0.12), transparent 60%),
+    radial-gradient(ellipse 40% 30% at 55% 60%, rgba(95, 211, 201, 0.10), transparent 60%),
+    linear-gradient(180deg, #050e1b 0%, var(--ocean-950) 100%);
+}
+
+/* property page heroes are shorter */
+.hero.prop-hero { min-height: 72vh; }
+
+.crumb {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-300);
+  margin-bottom: 1.2rem;
+}
+.crumb a { color: var(--ink-300); }
+.crumb a:hover { color: var(--gold-300); }
+
+/* ---------- notice ---------- */
+
+.notice {
+  margin-top: 3rem;
+  padding: 1.1rem 1.4rem;
+  border-left: 2px solid var(--gold-400);
+  background: rgba(212, 180, 106, 0.06);
+  font-size: 0.85rem;
+  color: var(--ink-300);
+}
+.section-sand .notice { background: rgba(179, 146, 74, 0.08); color: #4c5a6d; }
+
+@media (max-width: 640px) {
+  .facts li { flex-direction: column; gap: 0.15rem; }
+  .facts .v { text-align: left; }
+  .hero { min-height: 88vh; }
+}
+
+footer .legal {
+  margin-top: 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+}
