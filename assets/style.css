@@ -91,10 +91,14 @@ section { padding: clamp(3.5rem, 9vw, 7rem) 0; }
 /* ---------- header ---------- */
 
 .site-header {
-  position: absolute;
-  inset: 0 0 auto 0;
-  z-index: 10;
-  padding: 1.4rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 1.1rem 0;
+  background: rgba(5, 13, 26, 0.92);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(212, 180, 106, 0.15);
 }
 
 .site-header .wrap {
@@ -138,10 +142,10 @@ nav.main-nav a:hover { color: var(--gold-300); }
 
 .hero {
   position: relative;
-  min-height: 92vh;
+  min-height: 82vh;
   display: flex;
   align-items: flex-end;
-  padding: 9rem 0 clamp(3rem, 8vw, 6rem);
+  padding: 3rem 0 clamp(3rem, 8vw, 6rem);
   overflow: hidden;
   isolation: isolate;
 }
@@ -396,7 +400,7 @@ footer .foot-brand .brand { font-size: 1.05rem; }
 }
 
 /* property page heroes are shorter */
-.hero.prop-hero { min-height: 72vh; }
+.hero.prop-hero { min-height: 64vh; }
 
 .crumb {
   font-size: 0.72rem;
