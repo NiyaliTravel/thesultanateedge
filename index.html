@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/style.css?v=20260711b" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="assets/style.css?v=20260712" />
 </head>
 <body>
 
@@ -18,6 +19,7 @@
     <nav class="main-nav">
       <a href="#island">The Island</a>
       <a href="#stay">Stay</a>
+      <a href="#map">Map</a>
       <a href="#collection">The Collection</a>
       <a href="#enquire">Enquire</a>
     </nav>
@@ -40,19 +42,46 @@
 </div>
 
 <section id="island" class="section-sand">
-  <div class="wrap two-col">
-    <div>
-      <p class="eyebrow">The Island</p>
-      <h2>Hinnavaru</h2>
-      <hr class="rule" />
+  <div class="wrap">
+    <div class="two-col">
+      <div>
+        <p class="eyebrow">The Island &amp; The Atoll</p>
+        <h2>Hinnavaru, Lhaviyani</h2>
+        <hr class="rule" />
+      </div>
+      <div>
+        <p class="lede">Hinnavaru is one of Lhaviyani Atoll's principal islands —
+          a genuine, busy Maldivian community surrounded by an atoll famous
+          among divers.</p>
+        <p>Lhaviyani — known traditionally as <strong>Faadhippolhu</strong> — sits
+          in the country's north, about 120 km from Malé. It is one of the
+          Maldives' great diving atolls: fast channel drifts, famous wrecks at
+          the Shipyard, turtle-rich reefs and lagoons that fade from jade to
+          deep blue. Only four of its islands are inhabited, so the sea here
+          still feels wide open.</p>
+      </div>
     </div>
-    <div>
-      <p class="lede">Hinnavaru is one of Lhaviyani Atoll's principal islands —
-        a genuine, busy Maldivian community surrounded by an atoll famous
-        among divers.</p>
-      <p>Lhaviyani's channels, thilas and reefs draw divers from around the
-        world, and its lagoons and sandbanks reward everyone else. From
-        Hinnavaru's harbour, the atoll opens up by dhoni and speedboat.</p>
+    <div class="atoll-facts">
+      <div class="exp">
+        <h3>Hinnavaru</h3>
+        <p>One of the atoll's most populous islands and our home — a working
+          harbour, coral-stone lanes, cafés and a dedicated visitors' beach.</p>
+      </div>
+      <div class="exp">
+        <h3>Naifaru</h3>
+        <p>The atoll capital, a short dhoni hop away — famous for its
+          traditional medicine men and sea-turtle rescue work.</p>
+      </div>
+      <div class="exp">
+        <h3>Kurendhoo &amp; Olhuvelifushi</h3>
+        <p>Lhaviyani's two other inhabited islands — quiet communities on the
+          atoll's southern rim.</p>
+      </div>
+      <div class="exp">
+        <h3>The dive sites</h3>
+        <p>Kuredu Express, the Shipyard wrecks, Fushivaru Thila — channel
+          drifts and cleaning stations that draw divers from around the world.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -92,7 +121,18 @@
   </div>
 </section>
 
-<section id="collection" class="section-sand">
+<section id="map" class="section-sand">
+  <div class="wrap">
+    <p class="eyebrow">Find Us</p>
+    <h2>Hinnavaru on the map</h2>
+    <hr class="rule" />
+    <div id="islandmap" class="island-map"></div>
+    <p class="notice">Satellite view — the marker shows Hinnavaru island, Lhaviyani Atoll.
+      The guest house's exact position on the island is shared with your booking confirmation.</p>
+  </div>
+</section>
+
+<section id="collection">
   <div class="wrap">
     <p class="eyebrow">The Sultanate Hotels</p>
     <h2>The Collection</h2>
@@ -129,7 +169,7 @@
   </div>
 </section>
 
-<section id="enquire">
+<section id="enquire" class="section-sand">
   <div class="wrap">
     <p class="eyebrow">Reservations</p>
     <h2>Stay at the Edge</h2>
@@ -154,11 +194,24 @@
       <a href="https://longbeachlaamu.com">Long Beach Laamu</a>
     </nav>
     <nav>
+      <a href="#map">Find Us</a>
       <a href="#collection">The Collection</a>
       <a href="mailto:sales@niyalitravel.com">sales@niyalitravel.com</a>
     </nav>
   </div>
 </footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  (function () {
+    var island = [5.9925, 73.4095]; // Hinnavaru, Lhaviyani Atoll
+    var map = L.map('islandmap', { scrollWheelZoom: false }).setView(island, 13);
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Imagery &copy; Esri &amp; contributors', maxZoom: 18
+    }).addTo(map);
+    L.marker(island).addTo(map).bindPopup('<strong>The Sultanate Edge</strong><br>Hinnavaru, Lhaviyani Atoll').openPopup();
+  })();
+</script>
 
 </body>
 </html>
