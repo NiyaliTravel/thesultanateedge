@@ -479,3 +479,9 @@ footer .legal {
 .bs a:hover { color: var(--gold-400); }
 .bs .facts, .bs ul.facts { list-style: none; }
 .bs section, .bs .hero { box-sizing: border-box; }
+
+/* ---------- editable photos (admin-managed) ---------- */
+.hero-photo { position: absolute; inset: 0; z-index: -3; background-size: cover; background-position: center; }
+.hero:has(.hero-photo[style*="background-image"])::before { opacity: 0.82; }
+.island-photo { display: none; margin-top: 1.8rem; aspect-ratio: 4 / 3; background-size: cover; background-position: center; border: 1px solid rgba(212, 180, 106, 0.35); }
+.island-photo[style*="background-image"] { display: block; }
