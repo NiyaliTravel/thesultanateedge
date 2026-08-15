@@ -5,18 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Sultanate Edge — Lh. Hinnavaru, Maldives</title>
   <meta name="description" content="The Sultanate Edge — on the rim of Hinnavaru, Lhaviyani Atoll, made for divers and ocean lovers drawn to the atoll's channels and reefs." />
+  <link rel="canonical" href="https://thesultanateedge.com/" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#050d1a" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="The Sultanate Hotels" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:title" content="The Sultanate Edge — Lh. Hinnavaru, Maldives" />
+  <meta property="og:description" content="On the rim of Hinnavaru, where the island meets open water — a base for divers drawn to Lhaviyani's channels and reefs." />
+  <meta property="og:url" content="https://thesultanateedge.com/" />
+  <meta property="og:image" content="https://thesultanateedge.com/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="The Sultanate Edge — Lh. Hinnavaru, Maldives" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Sultanate Edge — Lh. Hinnavaru, Maldives" />
+  <meta name="twitter:description" content="Where Hinnavaru meets open water — a base for divers and snorkellers in Lhaviyani Atoll." />
+  <meta name="twitter:image" content="https://thesultanateedge.com/assets/og-image.jpg" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="assets/style.css?v=20260713" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="assets/style.css?v=20260723" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": "The Sultanate Edge",
+    "description": "On the rim of Hinnavaru, where the island meets open water — made for divers drawn to Lhaviyani's channels and reefs.",
+    "url": "https://thesultanateedge.com/",
+    "image": "https://thesultanateedge.com/assets/og-image.jpg",
+    "email": "sales@niyalitravel.com",
+    "numberOfRooms": 8,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Hinnavaru",
+      "addressRegion": "Lhaviyani Atoll",
+      "addressCountry": "MV"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 5.9925, "longitude": 73.4095 },
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "The Sultanate Hotels",
+      "url": "https://thesultanatehotels.com/"
+    }
+  }
+  </script>
 </head>
 <body>
+
+<a class="skip-link" href="#island">Skip to content</a>
 
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html">The Sultanate Edge<small>Lh. Hinnavaru · Maldives</small></a>
-    <nav class="main-nav">
+    <nav class="main-nav" aria-label="Primary">
       <a href="#island">The Island</a>
       <a href="#stay">Stay</a>
       <a href="#rooms">Rooms</a>
@@ -228,10 +275,14 @@
   </div>
 </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
 <script>
   (function () {
     var island = [5.9925, 73.4095]; // Hinnavaru, Lhaviyani Atoll
+    var el = document.getElementById('islandmap');
+    // Leaflet is a third-party CDN dependency - degrade quietly instead of throwing.
+    if (!el || typeof L === 'undefined') { if (el) { el.style.display = 'none'; } return; }
     var map = L.map('islandmap', { scrollWheelZoom: false }).setView(island, 13);
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Imagery &copy; Esri &amp; contributors', maxZoom: 18

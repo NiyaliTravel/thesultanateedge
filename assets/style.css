@@ -88,6 +88,10 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); }
 
 section { padding: clamp(3.5rem, 9vw, 7rem) 0; }
 
+/* The header is sticky, so anchored sections must clear it when jumped to. */
+section[id], [id].island-map { scroll-margin-top: 6.5rem; }
+@media (max-width: 720px) { section[id], [id].island-map { scroll-margin-top: 8.5rem; } }
+
 /* ---------- header ---------- */
 
 .site-header {
@@ -155,7 +159,7 @@ nav.main-nav a:hover { color: var(--gold-300); }
   content: '';
   position: absolute;
   inset: 0;
-  z-index: -2;
+  z-index: -3;
   background:
     radial-gradient(ellipse 90% 55% at 70% 15%, rgba(16, 57, 92, 0.9), transparent 65%),
     radial-gradient(ellipse 70% 45% at 20% 80%, rgba(95, 211, 201, 0.12), transparent 60%),
@@ -242,7 +246,8 @@ nav.main-nav a:hover { color: var(--gold-300); }
 .prop-card p { color: var(--ink-300); font-size: 0.92rem; margin: 0; }
 
 .prop-card .go {
-  display: inline-block;
+  display: block;
+  width: fit-content;
   margin-top: 1.4rem;
   font-size: 0.72rem;
   letter-spacing: 0.24em;
@@ -250,6 +255,10 @@ nav.main-nav a:hover { color: var(--gold-300); }
   color: var(--gold-300);
 }
 .prop-card .go::after { content: ' →'; }
+/* Second CTA (Book on Niyali Travel) sits tight under Visit website. */
+.prop-card .go + .go { margin-top: 0.55rem; }
+a.prop-card .go, .prop-card a.go { text-decoration: none; }
+.prop-card a.go:hover { color: var(--gold-400); }
 
 /* ---------- alternating sections ---------- */
 
@@ -481,7 +490,51 @@ footer .legal {
 .bs section, .bs .hero { box-sizing: border-box; }
 
 /* ---------- editable photos (admin-managed) ---------- */
-.hero-photo { position: absolute; inset: 0; z-index: -3; background-size: cover; background-position: center; }
-.hero:has(.hero-photo[style*="background-image"])::before { opacity: 0.82; }
+/* Sits above the gradient art (::before, -3) and below the atoll ring (::after, -1),
+   so a real photo replaces the art entirely instead of being dimmed behind it. */
+.hero-photo { position: absolute; inset: 0; z-index: -2; background-size: cover; background-position: center; }
+
+/* Legibility scrim — only painted once a photo is actually set. Weighted to the
+   bottom, where the hero copy sits (.hero uses align-items: flex-end). */
+.hero-photo[style*="background-image"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5, 13, 26, 0.2) 0%, rgba(5, 13, 26, 0.5) 45%, rgba(5, 13, 26, 0.86) 100%);
+}
+
 .island-photo { display: none; margin-top: 1.8rem; aspect-ratio: 4 / 3; background-size: cover; background-position: center; border: 1px solid rgba(212, 180, 106, 0.35); }
 .island-photo[style*="background-image"] { display: block; }
+
+/* ---------- gallery ---------- */
+
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 2.4rem; }
+.gallery-grid img { width: 100%; height: 260px; object-fit: cover; border: 1px solid rgba(212, 180, 106, 0.3); display: block; }
+
+/* ---------- accessibility ---------- */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.85rem 1.4rem;
+  background: var(--gold-400);
+  color: var(--ocean-950);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.skip-link:focus { left: 0; color: var(--ocean-950); }
+
+:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

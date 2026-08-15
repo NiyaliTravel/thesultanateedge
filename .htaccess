@@ -1,5 +1,51 @@
+# The Sultanate Hotels â€” static site server config
+# Pure static HTML/CSS. No build step.
+
+# ---- Character encoding -------------------------------------------------
+# Without this the server sends "Content-Type: text/html" with no charset and
+# strict clients (some crawlers, link previewers, feed readers) mis-decode the
+# em-dashes and "Â·" separators used throughout the copy.
+AddDefaultCharset UTF-8
+<IfModule mod_mime.c>
+  AddCharset UTF-8 .html .css .js .svg
+</IfModule>
+
+# ---- Canonical HTTPS ----------------------------------------------------
+# Both conditions must hold before redirecting, so a TLS-terminating proxy
+# that forwards plain HTTP internally cannot cause a redirect loop.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ---- Caching ------------------------------------------------------------
+# HTML stays uncached so admin-panel publishes appear immediately.
+# Fingerprinted CSS and photography are safe to cache hard.
 <IfModule mod_headers.c>
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
+  <FilesMatch "\.(css|js|jpg|jpeg|png|webp|svg|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType image/jpeg                "access plus 1 year"
+  ExpiresByType image/png                 "access plus 1 year"
+  ExpiresByType image/webp                "access plus 1 year"
+  ExpiresByType image/svg+xml             "access plus 1 year"
+</IfModule>
+
+# ---- Compression --------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
 </IfModule>
