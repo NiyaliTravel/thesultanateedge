@@ -1,6 +1,14 @@
 # The Sultanate Hotels â€” static site server config
 # Pure static HTML/CSS. No build step.
 
+# ---- TEMPORARILY RETIRED (2026-08) --------------------------------------
+# The Sultanate Edge is paused for now; all traffic redirects to the
+# collection hub. To bring this site back, delete this block.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^ https://thesultanatehotels.com/ [R=302,L]
+</IfModule>
+
 # ---- Character encoding -------------------------------------------------
 # Without this the server sends "Content-Type: text/html" with no charset and
 # strict clients (some crawlers, link previewers, feed readers) mis-decode the
