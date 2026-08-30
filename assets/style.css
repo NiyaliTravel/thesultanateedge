@@ -548,3 +548,7 @@ footer .legal {
 .brand:has(.brand-logo) { line-height: 0; }
 .brand .brand-logo + small { margin-top: 0.45rem; }
 .foot-brand .brand-logo { height: 56px; }
+
+/* Coming-soon lockup carries an extra line, so lift it slightly to keep the
+   wordmark optically the same size as on the open houses. */
+.brand-logo.is-soon { height: clamp(63px, 7vw, 90px); }
