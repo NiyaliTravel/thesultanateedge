@@ -1,4 +1,48 @@
+# https://thesultanateedge.com — The Sultanate Hotels collection
+# Open to search engines and to AI answer engines. We want this hotel's
+# facts quoted accurately, so assistants are explicitly welcome.
+
 User-agent: *
+Allow: /
+
+# --- AI answer / training crawlers (explicitly permitted) ---
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+User-agent: meta-externalagent
+Allow: /
+User-agent: Amazonbot
+Allow: /
+User-agent: DuckAssistBot
+Allow: /
+User-agent: CCBot
+Allow: /
+User-agent: cohere-ai
+Allow: /
+User-agent: YouBot
+Allow: /
+User-agent: MistralAI-User
 Allow: /
 
 Sitemap: https://thesultanateedge.com/sitemap.xml
