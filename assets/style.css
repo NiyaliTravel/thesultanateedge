@@ -538,3 +538,13 @@ footer .legal {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* --- Brand logo (emblem + wordmark lockup) ------------------------------- */
+.brand-logo {
+  display: block;
+  height: clamp(58px, 6.4vw, 82px);
+  width: auto;
+}
+.brand:has(.brand-logo) { line-height: 0; }
+.brand .brand-logo + small { margin-top: 0.45rem; }
+.foot-brand .brand-logo { height: 56px; }
