@@ -1,24 +1,47 @@
 /*
  * The Sultanate Hotels — brand design system
- * Shares the "obsidian glass" DNA of the Maldives Explore Map:
- * deep ocean navy, warm sand, one precious accent (champagne gold).
+ * Implements SULTANATE_BRAND_GUIDELINE.pdf, Edition One, 2026.
+ *
+ * The governing rule of that document: Ivory Cream is the default ground and
+ * "most of the brand is this colour". Ink Black is body text and the REVERSED
+ * ground for ceremony moments only. Sultanate Gold is an accent — rules, small
+ * caps, the emblem — and is "never a large fill".
+ *
+ * Restraint is the house style. When in doubt, do less.
+ *
+ * This file is byte-identical across every Sultanate marketing site. Change it
+ * here and copy; never fork it per property.
  */
 
 :root {
-  --ocean-950: #050d1a;
-  --ocean-900: #081426;
-  --ocean-800: #0b2b45;
-  --ocean-700: #10395c;
-  --sand-050: #faf6ec;
-  --sand-100: #f4ecdb;
-  --sand-200: #e8dcc3;
-  --sand-300: #d9c9a6;
-  --gold-400: #d4b46a;
-  --gold-300: #e3cb8f;
-  --gold-500: #b3924a;
-  --aqua-400: #5fd3c9;
-  --ink-300: #9fb2c8;
-  --ink-700: #2c3a4d;
+  /* --- Primary palette (approved) ------------------------------------ */
+  --ivory: #F9F5F1;        /* the default ground */
+  --ink: #1A1A1A;          /* body text; reversed ground for ceremony */
+  --gold: #C8AA62;         /* accent only — never a large fill */
+  --gold-tint: #D9C493;    /* hairlines and pattern, low contrast */
+
+  /* DEVIATION, flagged to the brand custodian.
+     The guideline sets small caps in Sultanate Gold. On the Ivory Cream ground
+     that measures 2.06:1 — well under the 4.5:1 minimum for small text, and the
+     small caps are specified at 10px. This is a darkened member of the same gold
+     family used ONLY where gold sets small type on a light ground: 5.16:1 on
+     Ivory Cream, 4.77:1 on the alternating band.
+     On the Ink Black ceremony ground the true Sultanate Gold is 7.78:1 and is
+     used unchanged. Rules, hairlines and the emblem always use --gold. */
+  --gold-ink: #7E6430;
+
+  /* The secondary palette (Lagoon Deep, Warm Sand, Royal Blue) is marked
+     "PROPOSED, FOR REVIEW" in the guideline and is deliberately not used. */
+
+  /* --- Derived neutrals ---------------------------------------------- */
+  /* Ivory warmed or cooled a step, so alternating bands read as one family
+     rather than as new colours. */
+  --ivory-deep: #F2ECE4;   /* alternating band on ivory */
+  --ivory-edge: #EAE2D6;   /* card edges, dividers on ivory */
+  --ink-soft: rgba(26, 26, 26, 0.62);   /* secondary text on ivory */
+  --ink-faint: rgba(26, 26, 26, 0.12);  /* hairlines on ivory */
+  --on-ink: #F3EEE7;       /* text on the reversed ground */
+  --on-ink-soft: rgba(243, 238, 231, 0.66);
 
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
@@ -33,49 +56,68 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--ocean-950);
-  color: var(--sand-100);
+  background: var(--ivory);
+  color: var(--ink);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
 
-::selection { background: var(--gold-400); color: var(--ocean-950); }
+::selection { background: var(--gold); color: var(--ink); }
 
 img { max-width: 100%; display: block; }
 
-a { color: var(--gold-300); text-decoration: none; }
-a:hover { color: var(--gold-400); }
+a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--gold); }
+a:hover { color: var(--gold); }
 
-/* ---------- typography ---------- */
+/* ---------- typography ----------
+ * Display is Cormorant Garamond Light. The guideline: "Never bolder than
+ * Medium; never below 16px." Inter never sets a headline. */
 
 h1, h2, h3, .display {
   font-family: var(--font-display);
-  font-weight: 500;
-  line-height: 1.15;
+  font-weight: 300;
+  line-height: 1.05;
   margin: 0;
-  color: var(--sand-050);
+  color: var(--ink);
+  text-wrap: balance;
 }
 
-h1 { font-size: clamp(2.6rem, 7vw, 5rem); letter-spacing: 0.01em; }
-h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+h1 { font-size: clamp(2.6rem, 7vw, 4.6rem); letter-spacing: 0.005em; }
+h2 { font-size: clamp(1.9rem, 4vw, 2.875rem); line-height: 1.09; }
 h3 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); }
 
+/* Tracked small caps — Inter 500, 0.3em. The guideline's only use of Inter
+   above body weight. */
 .eyebrow {
   font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.32em;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--gold-400);
-  margin: 0 0 1rem;
+  color: var(--gold-ink);
+  margin: 0 0 1.1rem;
 }
 
 .lede {
-  font-size: clamp(1.05rem, 2vw, 1.25rem);
-  color: var(--ink-300);
-  max-width: 42em;
+  font-size: clamp(1.02rem, 2vw, 1.18rem);
+  line-height: 1.75;
+  color: var(--ink-soft);
+  max-width: 40em;
+  font-weight: 300;
+}
+
+/* Pull quote — Cormorant 300 italic. */
+.pull {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.35rem, 2.6vw, 1.5rem);
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 24em;
+  margin: 2.4rem 0 0;
 }
 
 /* ---------- layout ---------- */
@@ -99,10 +141,10 @@ section[id], [id].island-map { scroll-margin-top: 6.5rem; }
   top: 0;
   z-index: 50;
   padding: 1.1rem 0;
-  background: rgba(5, 13, 26, 0.92);
+  background: rgba(249, 245, 241, 0.93);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(212, 180, 106, 0.15);
+  border-bottom: 1px solid var(--ink-faint);
 }
 
 .site-header .wrap {
@@ -114,61 +156,72 @@ section[id], [id].island-map { scroll-margin-top: 6.5rem; }
 
 .brand {
   font-family: var(--font-display);
+  font-weight: 300;
   font-size: 1.25rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--sand-050);
+  color: var(--ink);
   white-space: nowrap;
+  border-bottom: 0;
 }
 
 .brand small {
   display: block;
   font-family: var(--font-body);
   font-size: 0.58rem;
-  letter-spacing: 0.42em;
-  color: var(--gold-400);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: var(--gold-ink);
   margin-top: 0.15rem;
 }
 
-nav.main-nav { display: flex; gap: clamp(1rem, 3vw, 2.2rem); flex-wrap: wrap; }
+/* Tighter than the old nav: brand small caps carry 0.3em tracking, which makes
+   every item wider, so the gap gives the width back and keeps one row. */
+nav.main-nav { display: flex; gap: clamp(0.85rem, 2.1vw, 1.6rem); flex-wrap: wrap; }
+/* Tracking adds a trailing space after the last letter; pull it back so items
+   sit optically evenly. */
+nav.main-nav a { margin-right: -0.3em; }
 
 nav.main-nav a {
-  font-size: 0.78rem;
+  font-size: 0.625rem;
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--sand-200);
+  color: var(--ink-soft);
+  border-bottom: 0;
   transition: color 0.3s var(--ease-cinematic);
 }
-nav.main-nav a:hover { color: var(--gold-300); }
+nav.main-nav a:hover { color: var(--gold); }
 
-/* ---------- hero ---------- */
+/* ---------- hero ----------
+ * Ivory ground. The old obsidian gradient is retired: an ivory brand does not
+ * open on navy. Where a photograph is set it fills the hero; the art below is
+ * a quiet warm wash, not a picture of the sea. */
 
 .hero {
   position: relative;
-  min-height: 82vh;
+  min-height: 78vh;
   display: flex;
   align-items: flex-end;
   padding: 3rem 0 clamp(3rem, 8vw, 6rem);
   overflow: hidden;
   isolation: isolate;
+  background: var(--ivory);
 }
 
 .hero::before {
-  /* obsidian ocean with a bathymetric glow — non-photographic by design */
   content: '';
   position: absolute;
   inset: 0;
   z-index: -3;
   background:
-    radial-gradient(ellipse 90% 55% at 70% 15%, rgba(16, 57, 92, 0.9), transparent 65%),
-    radial-gradient(ellipse 70% 45% at 20% 80%, rgba(95, 211, 201, 0.12), transparent 60%),
-    radial-gradient(ellipse 45% 30% at 82% 70%, rgba(212, 180, 106, 0.10), transparent 65%),
-    linear-gradient(180deg, #071120 0%, var(--ocean-950) 100%);
+    radial-gradient(ellipse 80% 50% at 72% 12%, rgba(200, 170, 98, 0.10), transparent 66%),
+    radial-gradient(ellipse 70% 45% at 18% 88%, rgba(217, 196, 147, 0.14), transparent 62%),
+    linear-gradient(180deg, #FBF8F5 0%, var(--ivory) 100%);
 }
 
 .hero::after {
-  /* faint atoll ring */
+  /* faint atoll ring — a hairline, per the pattern rule */
   content: '';
   position: absolute;
   z-index: -1;
@@ -177,10 +230,7 @@ nav.main-nav a:hover { color: var(--gold-300); }
   right: -10vmin;
   top: 8vmin;
   border-radius: 50%;
-  border: 1px solid rgba(212, 180, 106, 0.22);
-  box-shadow:
-    0 0 80px rgba(212, 180, 106, 0.08),
-    inset 0 0 60px rgba(95, 211, 201, 0.06);
+  border: 1px solid rgba(200, 170, 98, 0.28);
 }
 
 .hero .eyebrow { margin-bottom: 1.4rem; }
@@ -192,19 +242,20 @@ nav.main-nav a:hover { color: var(--gold-300); }
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem 2.2rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.14em;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--ink-300);
+  color: var(--ink-soft);
 }
-.hero-meta span::before { content: '◆'; color: var(--gold-500); font-size: 0.55rem; margin-right: 0.7rem; vertical-align: 2px; }
+.hero-meta span::before { content: '◆'; color: var(--gold); font-size: 0.5rem; margin-right: 0.7rem; vertical-align: 2px; }
 
 /* ---------- gold rule ---------- */
 
 .rule {
   width: 64px;
   height: 1px;
-  background: linear-gradient(90deg, var(--gold-400), transparent);
+  background: linear-gradient(90deg, var(--gold), transparent);
   border: 0;
   margin: 1.6rem 0 0;
 }
@@ -222,53 +273,73 @@ nav.main-nav a:hover { color: var(--gold-300); }
   position: relative;
   display: block;
   padding: 2.2rem 1.9rem 1.9rem;
-  border: 1px solid rgba(212, 180, 106, 0.18);
-  background: linear-gradient(165deg, #0d2b46, #081426);
-  color: var(--sand-100);
+  border: 1px solid var(--ivory-edge);
+  background: #FDFBF9;
+  color: var(--ink);
   transition: border-color 0.4s var(--ease-cinematic), transform 0.4s var(--ease-cinematic);
 }
 
 .prop-card:hover {
-  border-color: rgba(212, 180, 106, 0.55);
+  border-color: var(--gold);
   transform: translateY(-4px);
-  color: var(--sand-100);
+  color: var(--ink);
 }
 
 .prop-card .atoll {
-  font-size: 0.68rem;
+  font-size: 0.625rem;
+  font-weight: 500;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--aqua-400);
+  color: var(--gold-ink);
 }
 
 .prop-card h3 { margin: 0.7rem 0 0.6rem; }
 
-.prop-card p { color: var(--ink-300); font-size: 0.92rem; margin: 0; }
+.prop-card p { color: var(--ink-soft); font-size: 0.92rem; margin: 0; font-weight: 300; }
 
 .prop-card .go {
   display: block;
   width: fit-content;
   margin-top: 1.4rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.24em;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--gold-300);
+  color: var(--ink);
+  border-bottom: 1px solid var(--gold);
 }
 .prop-card .go::after { content: ' →'; }
-/* Second CTA (Book on Niyali Travel) sits tight under Visit website. */
+/* Second CTA sits tight under Visit website. */
 .prop-card .go + .go { margin-top: 0.55rem; }
 a.prop-card .go, .prop-card a.go { text-decoration: none; }
-.prop-card a.go:hover { color: var(--gold-400); }
+.prop-card a.go:hover { color: var(--gold); }
 
-/* ---------- alternating sections ---------- */
+/* ---------- alternating band ----------
+ * A warmer step of the same ivory, not a second colour. */
 
 .section-sand {
-  background: var(--sand-100);
-  color: var(--ink-700);
+  background: var(--ivory-deep);
+  color: var(--ink);
 }
-.section-sand h2, .section-sand h3 { color: var(--ocean-900); }
-.section-sand .lede, .section-sand p { color: #4c5a6d; }
-.section-sand .eyebrow { color: var(--gold-500); }
+.section-sand h2, .section-sand h3 { color: var(--ink); }
+.section-sand .lede, .section-sand p { color: var(--ink-soft); }
+.section-sand .eyebrow { color: var(--gold-ink); }
+
+/* ---------- ceremony band ----------
+ * The guideline's "reversed ground for ceremony moments". Use sparingly — a
+ * closing statement, a single quote. Never for a whole page. */
+
+.section-ink {
+  background: var(--ink);
+  color: var(--on-ink);
+}
+.section-ink h1, .section-ink h2, .section-ink h3 { color: var(--on-ink); }
+.section-ink .lede, .section-ink p { color: var(--on-ink-soft); }
+.section-ink .eyebrow, .section-ink .atoll, .section-ink .facts .k { color: var(--gold); }
+.section-ink a { color: var(--on-ink); border-bottom-color: var(--gold); }
+.section-ink a:hover { color: var(--gold); }
+.section-ink .facts li { border-color: rgba(243, 238, 231, 0.16); }
+.section-ink .pull { color: var(--on-ink); }
 
 .two-col {
   display: grid;
@@ -292,27 +363,25 @@ a.prop-card .go, .prop-card a.go { text-decoration: none; }
   justify-content: space-between;
   gap: 2rem;
   padding: 0.85rem 0;
-  border-bottom: 1px solid rgba(159, 178, 200, 0.18);
+  border-bottom: 1px solid var(--ink-faint);
   font-size: 0.92rem;
 }
-.section-sand .facts li { border-color: rgba(44, 58, 77, 0.14); }
 
 .facts .k {
-  letter-spacing: 0.12em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--gold-400);
-  padding-top: 0.2rem;
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: var(--gold-ink);
+  padding-top: 0.35rem;
   white-space: nowrap;
 }
-.section-sand .facts .k { color: var(--gold-500); }
 
-.facts .v { text-align: right; }
+.facts .v { text-align: right; font-weight: 300; }
 
 .tbc {
   font-style: italic;
-  opacity: 0.65;
+  opacity: 0.6;
 }
 
 /* ---------- experiences ---------- */
@@ -326,14 +395,15 @@ a.prop-card .go, .prop-card a.go { text-decoration: none; }
 
 .exp {
   padding: 1.6rem 1.5rem;
-  border: 1px solid rgba(159, 178, 200, 0.16);
-  background: rgba(8, 20, 38, 0.5);
+  border: 1px solid var(--ivory-edge);
+  background: #FDFBF9;
 }
-.section-sand .exp { background: rgba(255, 255, 255, 0.55); border-color: rgba(44, 58, 77, 0.12); }
+.section-sand .exp { background: rgba(255, 255, 255, 0.6); }
+.section-ink .exp { background: rgba(255, 255, 255, 0.04); border-color: rgba(243, 238, 231, 0.16); }
 
 .exp h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
-.exp p { font-size: 0.88rem; margin: 0; color: var(--ink-300); }
-.section-sand .exp p { color: #4c5a6d; }
+.exp p { font-size: 0.88rem; margin: 0; color: var(--ink-soft); font-weight: 300; }
+.section-ink .exp p { color: var(--on-ink-soft); }
 
 /* ---------- CTA ---------- */
 
@@ -341,23 +411,26 @@ a.prop-card .go, .prop-card a.go { text-decoration: none; }
   display: inline-block;
   margin-top: 2.2rem;
   padding: 0.95rem 2.4rem;
-  border: 1px solid var(--gold-400);
-  color: var(--gold-300);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.26em;
+  border: 1px solid var(--gold);
+  color: var(--ink);
+  background: none;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   transition: background 0.35s var(--ease-cinematic), color 0.35s var(--ease-cinematic);
 }
-.btn:hover { background: var(--gold-400); color: var(--ocean-950); }
+.btn:hover { background: var(--gold); color: var(--ink); }
+.section-ink .btn { color: var(--on-ink); }
+.section-ink .btn:hover { background: var(--gold); color: var(--ink); }
 
 /* ---------- footer ---------- */
 
 footer {
-  border-top: 1px solid rgba(212, 180, 106, 0.18);
+  border-top: 1px solid var(--ink-faint);
   padding: 3rem 0 3.5rem;
   font-size: 0.82rem;
-  color: var(--ink-300);
+  color: var(--ink-soft);
 }
 
 footer .wrap {
@@ -368,75 +441,76 @@ footer .wrap {
 }
 
 footer nav { display: flex; flex-direction: column; gap: 0.45rem; }
-footer nav a { color: var(--ink-300); }
-footer nav a:hover { color: var(--gold-300); }
+footer nav a { color: var(--ink-soft); border-bottom: 0; }
+footer nav a:hover { color: var(--gold); }
 
 footer .foot-brand { max-width: 22em; }
 footer .foot-brand .brand { font-size: 1.05rem; }
 
-/* ---------- property hero variants ---------- */
+/* ---------- property hero variants ----------
+ * Each island gets a different quiet warm wash, not a different colour. */
 
 .hero.h-fulhadhoo::before {
   background:
-    radial-gradient(ellipse 85% 50% at 30% 20%, rgba(95, 211, 201, 0.16), transparent 60%),
-    radial-gradient(ellipse 70% 45% at 80% 75%, rgba(212, 180, 106, 0.12), transparent 60%),
-    linear-gradient(180deg, #06131f 0%, var(--ocean-950) 100%);
+    radial-gradient(ellipse 85% 50% at 30% 18%, rgba(217, 196, 147, 0.20), transparent 62%),
+    radial-gradient(ellipse 70% 45% at 82% 78%, rgba(200, 170, 98, 0.10), transparent 62%),
+    linear-gradient(180deg, #FCF9F6 0%, var(--ivory) 100%);
 }
 .hero.h-edge::before {
   background:
-    radial-gradient(ellipse 80% 55% at 75% 10%, rgba(16, 57, 92, 1), transparent 65%),
-    radial-gradient(ellipse 55% 40% at 15% 85%, rgba(95, 211, 201, 0.14), transparent 60%),
-    linear-gradient(180deg, #050f1c 0%, var(--ocean-950) 100%);
+    radial-gradient(ellipse 80% 55% at 76% 10%, rgba(200, 170, 98, 0.13), transparent 66%),
+    radial-gradient(ellipse 55% 40% at 14% 86%, rgba(217, 196, 147, 0.16), transparent 62%),
+    linear-gradient(180deg, #FBF8F4 0%, var(--ivory) 100%);
 }
 .hero.h-courtyard::before {
   background:
-    radial-gradient(ellipse 75% 50% at 50% 0%, rgba(212, 180, 106, 0.14), transparent 60%),
-    radial-gradient(ellipse 60% 45% at 85% 80%, rgba(16, 57, 92, 0.9), transparent 65%),
-    linear-gradient(180deg, #081120 0%, var(--ocean-950) 100%);
+    radial-gradient(ellipse 75% 50% at 50% 0%, rgba(200, 170, 98, 0.15), transparent 62%),
+    radial-gradient(ellipse 60% 45% at 86% 82%, rgba(217, 196, 147, 0.13), transparent 66%),
+    linear-gradient(180deg, #FCFAF7 0%, var(--ivory) 100%);
 }
 .hero.h-beach::before {
   background:
-    radial-gradient(ellipse 90% 55% at 25% 15%, rgba(95, 211, 201, 0.18), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 85%, rgba(232, 220, 195, 0.10), transparent 60%),
-    linear-gradient(180deg, #06121f 0%, var(--ocean-950) 100%);
+    radial-gradient(ellipse 90% 55% at 24% 14%, rgba(217, 196, 147, 0.22), transparent 62%),
+    radial-gradient(ellipse 60% 40% at 82% 86%, rgba(200, 170, 98, 0.09), transparent 62%),
+    linear-gradient(180deg, #FCF9F6 0%, var(--ivory) 100%);
 }
 .hero.h-laamu::before {
   background:
-    radial-gradient(ellipse 85% 55% at 70% 20%, rgba(16, 57, 92, 0.95), transparent 65%),
-    radial-gradient(ellipse 65% 45% at 20% 80%, rgba(212, 180, 106, 0.12), transparent 60%),
-    radial-gradient(ellipse 40% 30% at 55% 60%, rgba(95, 211, 201, 0.10), transparent 60%),
-    linear-gradient(180deg, #050e1b 0%, var(--ocean-950) 100%);
+    radial-gradient(ellipse 85% 55% at 70% 18%, rgba(200, 170, 98, 0.12), transparent 66%),
+    radial-gradient(ellipse 65% 45% at 18% 82%, rgba(217, 196, 147, 0.18), transparent 62%),
+    linear-gradient(180deg, #FBF8F4 0%, var(--ivory) 100%);
 }
 
 /* property page heroes are shorter */
-.hero.prop-hero { min-height: 64vh; }
+.hero.prop-hero { min-height: 62vh; }
 
 .crumb {
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--ink-300);
+  color: var(--ink-soft);
   margin-bottom: 1.2rem;
 }
-.crumb a { color: var(--ink-300); }
-.crumb a:hover { color: var(--gold-300); }
+.crumb a { color: var(--ink-soft); border-bottom: 0; }
+.crumb a:hover { color: var(--gold); }
 
 /* ---------- notice ---------- */
 
 .notice {
   margin-top: 3rem;
   padding: 1.1rem 1.4rem;
-  border-left: 2px solid var(--gold-400);
-  background: rgba(212, 180, 106, 0.06);
+  border-left: 2px solid var(--gold);
+  background: rgba(200, 170, 98, 0.07);
   font-size: 0.85rem;
-  color: var(--ink-300);
+  color: var(--ink-soft);
 }
-.section-sand .notice { background: rgba(179, 146, 74, 0.08); color: #4c5a6d; }
+.section-ink .notice { background: rgba(200, 170, 98, 0.10); color: var(--on-ink-soft); }
 
 @media (max-width: 640px) {
   .facts li { flex-direction: column; gap: 0.15rem; }
   .facts .v { text-align: left; }
-  .hero { min-height: 88vh; }
+  .hero { min-height: 84vh; }
 }
 
 footer .legal {
@@ -446,17 +520,11 @@ footer .legal {
   opacity: 0.75;
 }
 
-.section-sand .prop-card p { color: var(--ink-300); }
-.section-sand .prop-card { border-color: rgba(179, 146, 74, 0.35); }
-.section-sand .prop-card h3 { color: var(--sand-050); }
-.section-sand .prop-card .go { color: var(--gold-300); }
-.section-sand .prop-card:hover .go { color: var(--gold-400); }
-
 /* ---------- island map ---------- */
 .island-map {
   height: 440px;
   margin-top: 2.4rem;
-  border: 1px solid rgba(212, 180, 106, 0.35);
+  border: 1px solid var(--ivory-edge);
   z-index: 0;
 }
 .island-map .leaflet-popup-content { font-family: var(--font-body); font-size: 0.85rem; }
@@ -472,20 +540,19 @@ footer .legal {
 .bs h1, .bs h2, .bs h3,
 .hero h1, section h2, section h3 {
   font-family: var(--font-display);
-  font-weight: 500;
-  line-height: 1.15;
+  font-weight: 300;
+  line-height: 1.05;
   margin: 0;
 }
-.bs h1, .hero h1 { font-size: clamp(2.6rem, 7vw, 5rem); letter-spacing: 0.01em; color: var(--sand-050); }
-.bs h2, section h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--sand-050); }
-.bs h3, section h3 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); color: var(--sand-050); }
+.bs h1, .hero h1 { font-size: clamp(2.6rem, 7vw, 4.6rem); letter-spacing: 0.005em; color: var(--ink); }
+.bs h2, section h2 { font-size: clamp(1.9rem, 4vw, 2.875rem); color: var(--ink); }
+.bs h3, section h3 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); color: var(--ink); }
 .bs .exp h3, section .exp h3 { font-size: 1.15rem; }
 .bs .prop-card h3 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); }
-.bs .section-sand h2, .bs .section-sand h3,
-.section-sand h2, .section-sand h3 { color: var(--ocean-900); }
-.bs .section-sand .prop-card h3, .section-sand .prop-card h3 { color: var(--sand-050); }
-.bs a { color: var(--gold-300); text-decoration: none; }
-.bs a:hover { color: var(--gold-400); }
+.bs .section-ink h1, .bs .section-ink h2, .bs .section-ink h3,
+.section-ink h2, .section-ink h3 { color: var(--on-ink); }
+.bs a { color: var(--ink); text-decoration: none; }
+.bs a:hover { color: var(--gold); }
 .bs .facts, .bs ul.facts { list-style: none; }
 .bs section, .bs .hero { box-sizing: border-box; }
 
@@ -495,21 +562,28 @@ footer .legal {
 .hero-photo { position: absolute; inset: 0; z-index: -2; background-size: cover; background-position: center; }
 
 /* Legibility scrim — only painted once a photo is actually set. Weighted to the
-   bottom, where the hero copy sits (.hero uses align-items: flex-end). */
+   bottom, where the hero copy sits (.hero uses align-items: flex-end). A
+   photographic hero is a ceremony moment, so its copy reverses to ivory. */
 .hero-photo[style*="background-image"]::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(5, 13, 26, 0.2) 0%, rgba(5, 13, 26, 0.5) 45%, rgba(5, 13, 26, 0.86) 100%);
+  background: linear-gradient(180deg, rgba(26, 26, 26, 0.12) 0%, rgba(26, 26, 26, 0.46) 45%, rgba(26, 26, 26, 0.84) 100%);
 }
+.hero:has(.hero-photo[style*="background-image"]) h1,
+.hero:has(.hero-photo[style*="background-image"]) .lede,
+.hero:has(.hero-photo[style*="background-image"]) .hero-meta,
+.hero:has(.hero-photo[style*="background-image"]) .crumb { color: var(--on-ink); }
+.hero:has(.hero-photo[style*="background-image"]) .lede,
+.hero:has(.hero-photo[style*="background-image"]) .hero-meta { color: var(--on-ink-soft); }
 
-.island-photo { display: none; margin-top: 1.8rem; aspect-ratio: 4 / 3; background-size: cover; background-position: center; border: 1px solid rgba(212, 180, 106, 0.35); }
+.island-photo { display: none; margin-top: 1.8rem; aspect-ratio: 4 / 3; background-size: cover; background-position: center; border: 1px solid var(--ivory-edge); }
 .island-photo[style*="background-image"] { display: block; }
 
 /* ---------- gallery ---------- */
 
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 2.4rem; }
-.gallery-grid img { width: 100%; height: 260px; object-fit: cover; border: 1px solid rgba(212, 180, 106, 0.3); display: block; }
+.gallery-grid img { width: 100%; height: 260px; object-fit: cover; border: 1px solid var(--ivory-edge); display: block; }
 
 /* ---------- accessibility ---------- */
 
@@ -519,16 +593,17 @@ footer .legal {
   top: 0;
   z-index: 100;
   padding: 0.85rem 1.4rem;
-  background: var(--gold-400);
-  color: var(--ocean-950);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  background: var(--ink);
+  color: var(--ivory);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
+  border-bottom: 0;
 }
-.skip-link:focus { left: 0; color: var(--ocean-950); }
+.skip-link:focus { left: 0; color: var(--ivory); }
 
-:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -539,7 +614,9 @@ footer .legal {
   }
 }
 
-/* --- Brand logo (emblem + wordmark lockup) ------------------------------- */
+/* --- Brand logo (emblem + wordmark lockup) -------------------------------
+ * The master artwork is never recoloured. On the ivory ground the full-colour
+ * lockup is the approved form; the reversed ceremony band uses the white one. */
 .brand-logo {
   display: block;
   height: clamp(58px, 6.4vw, 82px);
