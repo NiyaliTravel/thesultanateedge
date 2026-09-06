@@ -571,11 +571,13 @@ footer .legal {
   background: linear-gradient(180deg, rgba(26, 26, 26, 0.12) 0%, rgba(26, 26, 26, 0.46) 45%, rgba(26, 26, 26, 0.84) 100%);
 }
 .hero:has(.hero-photo[style*="background-image"]) h1,
-.hero:has(.hero-photo[style*="background-image"]) .lede,
-.hero:has(.hero-photo[style*="background-image"]) .hero-meta,
 .hero:has(.hero-photo[style*="background-image"]) .crumb { color: var(--on-ink); }
 .hero:has(.hero-photo[style*="background-image"]) .lede,
 .hero:has(.hero-photo[style*="background-image"]) .hero-meta { color: var(--on-ink-soft); }
+/* A photographic hero is a dark ground, so the small caps revert to true
+   Sultanate Gold — 7.78:1 there, where the darkened gold would disappear. */
+.hero:has(.hero-photo[style*="background-image"]) .eyebrow,
+.hero:has(.hero-photo[style*="background-image"]) .hero-meta span::before { color: var(--gold); }
 
 .island-photo { display: none; margin-top: 1.8rem; aspect-ratio: 4 / 3; background-size: cover; background-position: center; border: 1px solid var(--ivory-edge); }
 .island-photo[style*="background-image"] { display: block; }
