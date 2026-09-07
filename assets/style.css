@@ -520,6 +520,43 @@ footer .legal {
   opacity: 0.75;
 }
 
+/* ---------- lattice divider ----------
+ * The pattern from the guideline, used the way the guideline allows it: on a
+ * surface that would otherwise be empty, as a quiet interlude between sections.
+ *
+ * Three rules govern it and all three are enforced here:
+ *   - never above 12% opacity;
+ *   - never behind body copy or a lockup — this band carries neither;
+ *   - never cropped mid-motif on a visible edge. A hard-edged band would slice
+ *     rosettes along all four sides, so the tile is masked to dissolve before it
+ *     reaches any edge. Nothing is cut; it fades out.
+ */
+.divider {
+  height: clamp(96px, 11vw, 150px);
+  background-image: url(pattern.svg?v=20260906c);
+  background-repeat: repeat;
+  background-size: 232px auto;
+  background-position: center center;
+  opacity: 0.12;
+  /* Dissolve on both axes. Two mask layers intersected: without the composite
+     the second layer would simply replace the first. */
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 38%, #000 62%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 38%, #000 62%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  pointer-events: none;
+}
+
+/* Where masks are unavailable the band would show hard-cropped motifs, which the
+   guideline forbids outright — so it simply does not render. */
+@supports not ((mask-composite: intersect) or (-webkit-mask-composite: source-in)) {
+  .divider { display: none; }
+}
+
 /* ---------- island map ---------- */
 .island-map {
   height: 440px;
